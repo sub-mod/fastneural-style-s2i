@@ -9,7 +9,7 @@
 
 
 echo "---> Installing application source..."
-cp -Rf /tmp/src/. ./
+
 
 echo "---> Building application from source..."
 
@@ -17,6 +17,7 @@ set -eo pipefail
 
 # Copy injected files to correct place in 'work' directory.
 
-mv /tmp/src/*  /opt/app-root/
+rm -fr /opt/app-root/src/*
+mv /tmp/src/*  /opt/app-root/src/
 
 

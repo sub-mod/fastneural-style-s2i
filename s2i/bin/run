@@ -7,10 +7,15 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-cd model
-echo "IMAGE = "$IMAGE
+echo "MODEL_URL = "$MODEL_URL
+echo "MODEL_FILE_NAME = "$MODEL_FILE_NAME
+echo "IMAGE_URL = "$IMAGE_URL
+echo "IMAGE_FILE_NAME = "$IMAGE_FILE_NAME
 echo "PORT = "$PORT
-wget $IMAGE 
+wget $IMAGE_URL -O $IMAGE_FILE_NAME
+wget $MODEL_URL
+
+mkdir -p results
 #python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path $(pwd)/content --out-path $(pwd)/results
 #python evaluate.py --checkpoint $(pwd)/wave.ckpt --in-path /content/ --out-path $(pwd)/results
 #cd $(pwd)/results
@@ -20,4 +25,8 @@ do
         echo "Press [CTRL+C] to stop.."
         sleep 1
 done
+
+
+#python evaluate.py --checkpoint $(pwd)/$MODEL_FILE_NAME --in-path $(pwd)/$IMAGE_FILE_NAME --out-path $(pwd)/results
+
 
