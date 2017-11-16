@@ -13,8 +13,9 @@ LABEL io.k8s.description="S2I builder for Fast-Style Evaluation." \
 RUN yum install -y epel-release 
 RUN yum install -y tree wget which python-pip \
 	&& yum clean all -y
-	
 
+RUN pip install --upgrade pip \
+	&& pip install tensorflow
 
 COPY ./s2i/bin/ /usr/libexec/s2i
 
@@ -23,7 +24,8 @@ RUN chown -R 1001:1001 /opt/app-root
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001
-RUN pip install tensorflow
+
+
 
 EXPOSE 8080
 
