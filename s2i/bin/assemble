@@ -1,0 +1,22 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 's2i' image.
+# The 'assemble' script builds your application source so that it is ready to run.
+#
+# For more information refer to the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+
+echo "---> Installing application source..."
+cp -Rf /tmp/src/. ./
+
+echo "---> Building application from source..."
+
+set -eo pipefail
+
+# Copy injected files to correct place in 'work' directory.
+
+mv /tmp/src/*  /opt/app-root/
+
+
